@@ -21,6 +21,7 @@ from django.contrib.auth import get_user_model
 from django.contrib import messages
 from .forms import ProfileUpdateForm
 
+
 def register_view(request, *args, **kwargs):
     user = request.user
     if user.is_authenticated:
@@ -89,7 +90,7 @@ def login_view(request, *args, **kwargs):
 
     user = request.user
     if user.is_authenticated:
-        return redirect('profile_view')
+        return redirect('profile', request.user.username)  # url required username, not sure bat ngayon lang nagerror
 
     destination = get_redirect_if_exists(request)
     print("destination: " + str(destination))
@@ -160,10 +161,6 @@ def email_ver_success(request):
     return render(request, 'accounts/email_ver_success.html', {})
 
 
-
-
-
-
 def password_reset(request):
     return render(request, "accounts/password_reset.html", {})
 
@@ -185,6 +182,7 @@ def delete_account(request):
             return render(request, 'accounts/delete_account_error.html')
 
     return render(request, 'accounts/delete_account_confirmation.html')
+
 
 @login_required
 def profile_update_view(request):
