@@ -90,12 +90,128 @@
 {#    </script>#}
 {##}
 {#</html>#}
+
+{#end of liam code#}------------------------
+
 {% extends 'profile/header.html' %}  <!-- Use your actual base template -->
 {% block content %}
-  <h2>Update Profile</h2>
+<h2>Update Profile</h2>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Update</button>
+    <p>
+    <label for="id_profile_image">Profile image:</label>
+    Currently: <a href="{{ user.profile_image.url }}">{{ user.profile_image.url }}</a>
+<input type="checkbox" name="profile_image-clear" id="profile_image-clear_id">
+<label for="profile_image-clear_id">Clear</label><br>
+Change:
+<input type="file" name="profile_image" accept="image/*" id="id_profile_image">
+
+
+  </p>
+
+
+  <p>
+    <label for="id_profile_cover">Profile cover:</label>
+    Currently: <a href="{{ user.profile_cover.url }}">{{ user.profile_cover.url }}</a>
+<input type="checkbox" name="profile_cover-clear" id="profile_cover-clear_id">
+<label for="profile_cover-clear_id">Clear</label><br>
+Change:
+<input type="file" name="profile_cover" accept="image/*" id="id_profile_cover">
+
+
+  </p>
+
+
+  <p>
+    <label for="id_profile_song">Profile song:</label>
+    Currently: <a href="{{ user.profile_song.url }}">{{ user.profile_song.url }}</a>
+<input type="checkbox" name="profile_song-clear" id="profile_song-clear_id">
+<label for="profile_song-clear_id">Clear</label><br>
+Change:
+<input type="file" name="profile_song" id="id_profile_song">
+
+
+  </p>
+
+
+  <p>
+    <label for="id_profile_background">Profile background:</label>
+    Currently: <a href="{{ user.profile_background.url }}">{{ user.profile_background.url }}</a>
+<input type="checkbox" name="profile_background-clear" id="profile_background-clear_id">
+<label for="profile_background-clear_id">Clear</label><br>
+Change:
+<input type="file" name="profile_background" accept="image/*" id="id_profile_background">
+
+
+  </p>
+
+
+  <p>
+    <label for="id_hide_email">Hide email:</label>
+    <input type="checkbox" name="hide_email" id="id_hide_email" checked>
+
+
+  </p>
+
+
+  <p>
+    <label for="id_bio">Bio:</label>
+    <input type="text" name="bio" value="{{ user.bio }}" maxlength="300" id="id_bio">
+
+
+  </p>
+
+
+  <p>
+    <label for="id_location">Location:</label>
+    <input type="text" name="location" value="{{user.location}}" maxlength="100" id="id_location">
+
+
+  </p>
+
+
+  <p>
+    <label for="id_color">Choose a Color:</label>
+    <input type="text"
+ id="id_color"
+ class="colorfield_field jscolor form-control"
+ name="color"
+ value="{{ user.color }}"
+ placeholder="choose a color ( hexcode )"
+ data-jscolor="{hash:true,width:225,height:150,format:'hex',required:true,paletteCols:4,paletteHeight:28}"
+
+ required />
+
+
+
+  </p>
+
+
+  <p>
+    <label for="id_backgroundColor">Choose a Background Color:</label>
+    <input type="text"
+ id="id_backgroundColor"
+ class="colorfield_field jscolor form-control"
+ name="backgroundColor"
+ value="{{ user.backgroundColor }}"
+ placeholder="choose a color ( hexcode )"
+ data-jscolor="{hash:true,width:225,height:150,format:'hex',required:true,paletteCols:4,paletteHeight:28}"
+
+ required />
+
+
+
+  </p>
+
+
+  <p>
+    <label for="id_font_preference">Font preference:</label>
+    <input type="text" name="font_preference" value="{{ user.font_preference.url }}" maxlength="50" required id="id_font_preference">
+
+
+
+
+  </p>
+    <button type="submit" href="{{ user.profile }}">Update</button>
   </form>
 {% endblock %}
