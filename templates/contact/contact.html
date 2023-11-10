@@ -18,43 +18,81 @@
 </head>
 <body>
             {% if user.is_superuser %}
-    <div class="testimonial-container" style="padding: 100px 100px 100px 100px; background-color: black">
-            <div style="padding-bottom: 20px">
-            <div class="wrapper" style="padding: 10px 20px 5px 20px">
-                <header><h1>Contact Page</h1></header>
-            </div>
-        </div>
-
+{#    <div class="testimonial-container" style="padding: 100px 100px 100px 100px; background-color: black">#}
+{#            <div style="padding-bottom: 20px">#}
+{#            <div class="wrapper" style="padding: 10px 20px 5px 20px">#}
+{#                <header><h1>Contact Page</h1></header>#}
+{#            </div>#}
+{#        </div>#}
+{##}
 {#                    {% for contact in contacts %}#}
-        <div class="row">
-            <div class="col-md-12">
-                <div class="contacts">
-                    <div class="card rounded">
-                        <div style="padding: 20px 10px 10px;" class="card-header">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <div class="d-flex justify-content-between">
-                                        <h5><strong>Name:</strong> {{ contact.name }}</h5>
-                                        <p class="tx-11 text-muted">{{ contact.email }}</p>
+{#        <div class="row">#}
+{#            <div class="col-md-12">#}
+{#                <div class="contacts">#}
+{#                    <div class="card rounded">#}
+{#                        <div style="padding: 20px 10px 10px;" class="card-header">#}
+{#                            <div class="d-flex align-items-center justify-content-between">#}
+{#                                <div class="d-flex align-items-center">#}
+{#                                    <div class="d-flex justify-content-between">#}
+{#                                        <h5><strong>Name:</strong> {{ contact.name }}</h5>#}
+{#                                        <p class="tx-11 text-muted">{{ contact.email }}</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div>#}
+{#                            <div class="contacts-body">#}
+{#                                <p><strong>Subject:</strong> {{ contact.subject }}</p>#}
+{#                                <p><strong>Message:</strong> {{ contact.comment }}</p>#}
+{#                                <a href="{% url 'send_email' contact.subject contact.email contact.name %}">#}
+{#                                    <button id="submit-btn">Respond</button>#}
+{#                                </a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+            <div class="testimonial-container" style="padding: 20px 100px 20px 100px;">
+    <div style="padding-bottom: 20px">
+        <div style="padding-top: 8px" class="card rounded">
+            <h1><header>Contact Page</header></h1>
+        </div>
+    </div>
+
+    <div class="row">
+                        {% for contact in contacts %}
+                <div class="col-md-4">
+                    <div class="testimonial-item">
+                        <div class="card rounded">
+                                <div style="padding: 20px 10px 10px;" class="card-header">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            <div class="d-flex justify-content-between">
+                                                <h4 style="margin-left: 10px;">{{ contact.name }}</h4>
+                                                <p style="margin-left: 10px; padding-top: 2px; font-size: 16px;">{{ contact.email }}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="testimonial-body">
+                                    <ul class="testimonial-list">
+                                        <li class="testimonial-item">
+                                            <h6 style="color: black" class="tx-14">{{ contact.subject }}</h6>
+                                            <div class="d-flex justify-content-between">
+                                                <p style="font-size: 12px;">{{ contact.comment }}</p>
+                                            </div>
+                                            <a href="{% url 'send_email' contact.subject contact.email contact.name %}">
+                                                <button id="submit-btn">Respond</button>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <div class="contacts-body">
-                                <p><strong>Subject:</strong> {{ contact.subject }}</p>
-                                <p><strong>Message:</strong> {{ contact.comment }}</p>
-{#                                <a href="{% url 'send_email' contact.subject contact.email contact.name %}">#}
-                                    <button id="submit-btn">Respond</button>
-                                </a>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-{#                {% endfor %}#}
-    </div>
+                {% endfor %}
+                </div>
 {#                <h1 class="text-3xl font-bold mb-4 uppercase text-center">Contact Messages</h1>#}
 {#                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">#}
 {#                    {% for contact in contacts %}#}
@@ -70,7 +108,7 @@
 {#                    {% endfor %}#}
 {#                </div>#}
             {% else %}
-                <div class="wrapper">
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" class="wrapper">
                 <div class="flex justify-center items-center">
                     <div>
                         <header><h1>Contact Us!</h1></header>

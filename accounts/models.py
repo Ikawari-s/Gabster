@@ -116,7 +116,7 @@ class UserAccount(AbstractBaseUser):
                                       default='default.png')
     profile_cover = models.ImageField(upload_to='profile_covers', blank=True, null=True,
                                       default='default.png')
-    profile_song = models.FileField(upload_to=get_profile_song_filepath, blank=True, null=True, default=None)
+    profile_song = models.FileField(upload_to=get_profile_song_filepath, blank=True, null=False, default=None)
     profile_background = models.ImageField(upload_to='profile_backgrounds', blank=True, null=True,
                                            default='background.png')
     hide_email = models.BooleanField(default=True)

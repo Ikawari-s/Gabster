@@ -11,11 +11,11 @@
     </div>
 
     <div class="row">
-        {% if testimonials_received %}
+       {% if testimonials_received %}
             {% for testimonial in testimonials_received %}
                 <div class="col-md-4">
                     <div class="testimonial-item">
-                        <a href="{% url 'testimonial_detail' testimonial.user_to.username testimonial.id %}?came_from=view_testimonials">
+                        <a style="text-decoration: none" href="{% url 'testimonial_detail' testimonial.user_to.username testimonial.id %}?came_from=view_testimonials">
                             <div style="background: {{ user.color }}" class="card rounded">
                                 <div style="padding: 20px 10px 10px;" class="card-header">
                                     <div class="d-flex align-items-center justify-content-between">
@@ -46,6 +46,7 @@
                 </div>
             {% endfor %}
         {% else %}
+    </div>
             <div class="col-md-12">
                 <div style="padding: 20px">
                     <div style="background: {{ user.color }};padding-top: 10px;" class="card rounded">

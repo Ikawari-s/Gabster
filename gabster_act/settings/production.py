@@ -125,7 +125,7 @@ EMAIL_HOST_USER = 'HAUGabster@gmail.com'
 EMAIL_HOST_PASSWORD = 'zrus ndax kuiy ysvv'
 EMAIL_DEBUG = True
 
-EXPIRE_AFTER = "1m"
+EXPIRE_AFTER = "5m"
 
 LOGIN_REDIRECT_URL = '/'
 
