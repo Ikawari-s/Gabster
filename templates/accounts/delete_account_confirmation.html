@@ -12,16 +12,18 @@
     <title>Delete Account</title>
 </head>
 <body>
+<div class="wrapper" style="padding: 20px">
     <div id="delete-account-modal" class="modal">
         <div class="modal-content">
-            <h2>Delete Account</h2>
-            <p>Are you sure you want to delete your account?</p>
+            <header><h1>Delete Account</h1></header>
+            <p style="text-align: center">Are you sure you want to delete your account?</p>
             <form method="post" action="{% url 'delete_account' %}">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Yes, delete my account</button>
-                <a href="{% url 'profile' user.username %}" class="btn btn-secondary">Cancel</a>
+                <button id="submit-btn" type="submit" class="btn btn-danger">Yes, delete my account</button>
+                <a id="cancel" href="{% url 'profile' user.username %}" class="btn btn-secondary">Cancel</a>
             </form>
         </div>
     </div>
+</div>
 </body>
 </html>

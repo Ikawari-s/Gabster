@@ -80,7 +80,7 @@
                                         <li class="testimonial-item">
                                             <h6 style="color: black" class="tx-14">{{ contact.subject }}</h6>
                                             <div class="d-flex justify-content-between">
-                                                <p style="font-size: 12px;">{{ contact.comment }}</p>
+                                                <p style="font-size: 12px;overflow:hidden;">{{ contact.comment }}</p>
                                             </div>
                                             <a href="{% url 'send_email' contact.subject contact.email contact.name %}">
                                                 <button id="submit-btn">Respond</button>
@@ -93,20 +93,6 @@
                 </div>
                 {% endfor %}
                 </div>
-{#                <h1 class="text-3xl font-bold mb-4 uppercase text-center">Contact Messages</h1>#}
-{#                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">#}
-{#                    {% for contact in contacts %}#}
-{#                        <div class="bg-white rounded-lg shadow-xl p-4">#}
-{#                            <p><strong>Name:</strong> {{ contact.name }}</p>#}
-{#                            <p><strong>Email:</strong> {{ contact.email }}</p>#}
-{#                            <p><strong>Subject:</strong> {{ contact.subject }}</p>#}
-{#                            <p><strong>Message:</strong> {{ contact.comment }}</p>#}
-{#                            <a href="{% url 'send_email' contact.subject contact.email contact.name %}">#}
-{#                                <button id="submit-btn">Respond</button>#}
-{#                            </a>#}
-{#                        </div>#}
-{#                    {% endfor %}#}
-{#                </div>#}
             {% else %}
                 <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" class="wrapper">
                 <div class="flex justify-center items-center">

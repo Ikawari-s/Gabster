@@ -83,25 +83,14 @@ form h3{
   font-weight: 500;
   margin-left: 10px;
 }
-.input-box.button input{
+.input-box.button input {
   color: #fff;
   letter-spacing: 1px;
   border: none;
   background: #fe8116;
   cursor: pointer;
 }
-/*form .text h3{*/
-/* color: #333;*/
-/* width: 100%;*/
-/* text-align: center;*/
-/*}*/
-/*form .text h3 a{*/
-/*  color: #fe8116;*/
-/*  text-decoration: none;*/
-/*}*/
-/*form .text h3 a:hover{*/
-/*  text-decoration: underline;*/
-/*}*/
+
 .wrapper a{
   color: #fe8116;
   text-align: center;
@@ -131,4 +120,27 @@ form h3{
 .logo h1{
   position: absolute;
   left: 80px;
+}
+
+#submit-btn{
+  font-family: "Poppins", sans-serif;
+  font-size: 17px;
+  width: 100%;
+  height: 50px;
+  color: #fff;
+  padding: 0;
+  border: none;
+  background: #fe8116;
+  cursor: pointer;
+  border-radius: 5px;
+  border-bottom: 2px solid rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+#cancel{
+  padding: 20px 5px 10px 20px;
+  position: relative;
+  float: right;
+  color: red;
+  text-decoration: underline;
 }
