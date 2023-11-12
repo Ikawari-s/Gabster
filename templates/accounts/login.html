@@ -48,21 +48,24 @@
         <input type="submit" value="Login">
       </div>
         {% if form.non_field_errors %}
-            {{ form.non_field_errors }}
+            <div class="error-message" style="color: red; margin-bottom: 10px;">
+                 {{ form.non_field_errors }}
+            </div>
         {% endif %}
-       {% for field in login_form %}
-      <p>
-          {% for error in field.errors %}
-              <p style="color: red"><i class="error error-icon fas fa-exclamation-circle"></i>{{ error }}</p>
-          {% endfor %}
-      </p>
-      {% endfor %}
+{#       {% for field in login_form %}#}
+{#      <p>#}
+{#          {% for error in field.errors %}#}
+{#              <p style="color: red"><i class="error error-icon fas fa-exclamation-circle"></i>{{ error }}</p>#}
+{#          {% endfor %}#}
+{#      </p>#}
+{#      {% endfor %}#}
+{##}
+{#      {% if login_form.non_field_errors %}#}
+{#          <div style="color: red">#}
+{#              <p style="color: red"><i class="error error-icon fas fa-exclamation-circle"></i>{{ login_form.non_field_errors }}</p>#}
+{#          </div>#}
+{#      {% endif %}#}
 
-      {% if login_form.non_field_errors %}
-          <div style="color: red">
-              <p><i class="error error-icon fas fa-exclamation-circle"></i>{{ login_form.non_field_errors }}</p>
-          </div>
-      {% endif %}
     </form>
     <div class="sign-txt">Don't have an account? <a href="{% url 'register' %}">Sign up now</a></div>
     <div class="sign-txt">Need help? <a href='/contact'>Contact us</a></div>

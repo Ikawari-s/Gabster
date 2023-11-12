@@ -30,10 +30,10 @@ class AuthenticationEmailBackend(ModelBackend):
             user = UserModel.objects.get(Q(username=username) | Q(email=username))
             if user.check_password(password):
                 return user
-            else:
-                raise UserDoesNotExistOrInactiveError("User does not exist or is not active")
         except UserModel.DoesNotExist:
-            raise UserDoesNotExistOrInactiveError("User does not exist or is not active")
+            pass
+        return None
+
 
     def get_user(self, user_id):
         try:

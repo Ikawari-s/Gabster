@@ -55,7 +55,7 @@ class AccountAuthenticationForm(forms.Form):
             user = authenticate(email=username, password=password)
 
         if not user or not user.is_active:
-            raise forms.ValidationError("Sorry, that login was invalid. Please try again.")
+            raise forms.ValidationError("Invalid login.")
         return self.cleaned_data
 
     def login(self, request):

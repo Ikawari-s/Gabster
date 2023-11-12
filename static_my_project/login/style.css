@@ -121,3 +121,10 @@ form h3{
   position: absolute;
   left: 80px;
 }
+.error-message {
+    color: red;
+    font-size: 14px; /* Example size, adjust as needed */
+    display: flex;
+    align-items: center; /* This vertically centers the icon with the text */
+    gap: 5px; /* Adds space between the icon and the text */
+}
