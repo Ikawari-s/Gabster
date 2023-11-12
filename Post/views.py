@@ -72,34 +72,27 @@ def post_detail(request, username, post_id):
 
 
 
-@login_required
+
 def like(request, username, post_id):
     user = request.user
-    target_post = Post.objects.get(pk=post_id)
+    target_post = get_object_or_404(Post, pk=post_id)
 
-    try:
-        user_like, created = UserLike.objects.get_or_create(voter=user, post=target_post)
+    user_like, created = UserLike.objects.get_or_create(voter=user, post=target_post)
 
-        if created:
-            target_post.likes += 1
-            target_post.save()
-            target_post.likes.add(user)
-        elif not user_like.is_liked:
-            user_like.is_liked = True
-            user_like.save()
-            target_post.likes += 1
-            target_post.save()
-            target_post.liked_by.add(user)
-        else:
-            user_like.is_liked = False
-            user_like.save()
-            target_post.likes -= 1
-            target_post.save()
-            target_post.liked_by.remove(user)
+    if created or not user_like.is_liked:
+        user_like.is_liked = True
+        target_post.likes += 1
+        target_post.liked_by.add(user)
+    else:
+        user_like.is_liked = False
+        target_post.likes -= 1
+        target_post.liked_by.remove(user)
 
-        return JsonResponse({'likes': target_post.likes})
-    except Post.DoesNotExist:
-        return JsonResponse({'error': 'The post does not exist.'}, status=404)
+    user_like.save()
+    target_post.save()
+    target_post.refresh_from_db()
+    return JsonResponse({'likes': target_post.likes})
+
 
 
 @login_required
