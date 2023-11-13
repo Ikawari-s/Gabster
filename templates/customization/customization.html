@@ -117,8 +117,12 @@
   <form method="post" enctype="multipart/form-data" id="post-form">
     {% csrf_token %}
     <p>
-    <label for="id_profile_image">Profile image:</label>
-    Currently: <a href="{{ user.profile_image.url }}">{{ user.profile_image.url }}</a> <br>
+     <label for="id_profile_image">Profile image:</label><br>
+      {% if user.profile_image.url %}
+        Currently: <a href="{{ user.profile_image.url }}">{{ user.profile_image.url|truncatechars:40 }}</a>
+      {% else %}
+        Currently: None
+      {% endif %}
 {#<input type="checkbox" name="profile_image-clear" id="profile_image-clear_id">#}
 {#<label for="profile_image-clear_id">Clear</label><br>#}
 Change:
@@ -126,34 +130,44 @@ Change:
   </p>
 
   <p>
-    <label for="id_profile_cover">Profile cover:</label>
-    Currently: <a href="{{ user.profile_cover.url }}">{{ user.profile_cover.url }}</a> <br>
-{#<input type="checkbox" name="profile_cover-clear" id="profile_cover-clear_id">#}
-{#<label for="profile_cover-clear_id">Clear</label><br>#}
-Change:
-<input type="file" name="profile_cover" accept="image/*" id="id_profile_cover">
+     <label for="id_profile_cover">Profile cover:</label><br>
+     {% if user.profile_cover and user.profile_cover.url %}
+            Currently: <a href="{{ user.profile_cover.url }}">{{ user.profile_cover.url|truncatechars:40 }}</a>
+        {% else %}
+            Currently: None
+        {% endif %}
+    <input type="checkbox" name="profile_cover-clear" id="profile_cover-clear_id">
+    <label for="profile_cover-clear_id">Clear</label><br>
+    Change:
+    <input type="file" name="profile_cover" accept="image/*" id="id_profile_cover">
   </p>
+
+   <p>
+      <label for="id_profile_song">Profile song:</label><br>
+      {% if user.profile_song and user.profile_song.url %}
+        Currently: <a href="{{ user.profile_song.url }}">{{ user.profile_song.url|truncatechars:40 }}</a>
+      {% else %}
+        Currently: None
+      {% endif %}
+      <input type="checkbox" name="profile_song-clear" id="profile_song-clear_id">
+      <label for="profile_song-clear_id">Clear</label><br>
+      Change:
+      <input type="file" name="profile_song" id="id_profile_song">
+    </p>
 
   <p>
+  <label for="id_profile_background">Profile background:</label><br>
+  {% if user.profile_background and user.profile_background.url %}
+    Currently: <a href="{{ user.profile_background.url }}">{{ user.profile_background.url }}</a>
+  {% else %}
+    Currently: None
+  {% endif %}
+  <input type="checkbox" name="profile_background-clear" id="profile_background-clear_id">
+  <label for="profile_background-clear_id">Clear</label><br>
+  Change:
+  <input type="file" name="profile_background" accept="image/*" id="id_profile_background">
+</p>
 
-    <label for="id_profile_song">Profile song:</label>
-    Currently: <a href="{{ user.profile_song.url }}">{{ user.profile_song.url }}</a>
-{#<input type="checkbox" name="profile_song-clear" id="profile_song-clear_id">#}
-{#<label for="profile_song-clear_id">Clear</label><br>#}
-Change:
-<input type="file" name="profile_song" id="id_profile_song">
-
-
-  </p>
-
-  <p>
-    <label for="id_profile_background">Profile background:</label>
-    Currently: <a href="{{ user.profile_background.url }}">{{ user.profile_background.url }}</a> <br>
-{#<input type="checkbox" name="profile_background-clear" id="profile_background-clear_id">#}
-{#<label for="profile_background-clear_id">Clear</label><br>#}
-Change:
-<input type="file" name="profile_background" accept="image/*" id="id_profile_background">
-  </p>
 
   <p>
     <label for="id_hide_email">Hide email:</label>

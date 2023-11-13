@@ -16,3 +16,16 @@ class ProfileUpdateForm(forms.ModelForm):
             'backgroundColor',
             'font_preference',
         ]
+
+    def __init__(self, *args, **kwargs):
+        super(ProfileUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['profile_image'].required = False
+        self.fields['profile_cover'].required = False
+        self.fields['profile_song'].required = False
+        self.fields['profile_background'].required = False
+        self.fields['hide_email'].required = False
+        self.fields['bio'].required = False
+        self.fields['location'].required = False
+        self.fields['color'].required = False
+        self.fields['backgroundColor'].required = False
+        self.fields['font_preference'].required = False
