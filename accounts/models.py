@@ -115,17 +115,16 @@ class UserAccount(AbstractBaseUser):
     profile_image = models.ImageField(upload_to='profile_images', blank=True, null=True,
                                       default='default.png')
     profile_cover = models.ImageField(upload_to='profile_covers', blank=True, null=True,
-                                      default='default.png')
+                                      default='img.png')
     profile_song = models.FileField(upload_to=get_profile_song_filepath, blank=True, null=False, default=None)
     profile_background = models.ImageField(upload_to='profile_backgrounds', blank=True, null=True,
                                            default='background.png')
     hide_email = models.BooleanField(default=True)
     bio = models.CharField(max_length=300, null=True, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
-    color = ColorField(default='#3a3b3c')
-    backgroundColor = ColorField(default='linear-gradient(to right, rgba(44,15,85,0.9), rgba(44,15,38, 0.9))')
-    # font_preference = models.CharField(max_length=50, default='"Poppins", sans-serif')
-    fontColor = ColorField(default='linear-gradient(to right, rgba(44,15,85,0.9), rgba(44,15,38, 0.9))')
+    color = ColorField(default='#ffffff')
+    backgroundColor = ColorField(default='#FE8116')
+    fontColor = ColorField(default='#24262e')
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
