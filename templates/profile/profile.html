@@ -54,7 +54,7 @@
 
                         {% if not user.hide_email %}
                             <label style = "color: {{ user.fontColor }}" class="tx-11 font-weight-bold mb-0 text-uppercase">Email:</label>
-                            <p class="text-muted">{{ user.email }}</p>
+                            <p style = "color:{{ user.fontColor }}">{{ user.email }}</p>
                         {% endif %}
                     </div>
                      <div>
@@ -165,7 +165,7 @@
                                     </form>
                                  <div class="d-flex post-actions">
                                     <a href="{% url 'post_detail' post.user.username post.id %}" class="d-flex align-items-center text-muted comment-btn" style="text-decoration: none; cursor: pointer;">
-                                      <p>{{ post.comment_count }} Comments</p>
+                                      <p style = "color:{{ user.fontColor }}">{{ post.comment_count }} Comments</p>
                                     </a>
                                 </div>
                             </div>
