@@ -62,14 +62,16 @@ def profile_view(request, username):
 
 
 def search(request):
+    search_performed = False  # Initialize the variable
+
     if request.GET.get('search_query'):
         search_query = request.GET.get('search_query')
         users = UserAccount.objects.distinct().filter(username__icontains=search_query)
-
-        return render(request,'profile/search.html', {'users': users})
+        search_performed = True  # Set to True when a search query is present
+        return render(request, 'profile/search.html', {'users': users, 'search_performed': search_performed})
     else:
         users = None
+        # Ensure search_performed is included in the context even when no search is performed
+        return render(request, 'profile/search.html', {'users': users, 'search_performed': search_performed})
 
-
-        return render(request, 'profile/search.html', {'users': users})
 
