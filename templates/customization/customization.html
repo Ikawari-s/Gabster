@@ -66,7 +66,7 @@ Change:
   <p>
   <label for="id_profile_background">Profile background:</label><br>
   {% if user.profile_background and user.profile_background.url %}
-    Currently: <a href="{{ user.profile_background.url }}">{{ user.profile_background.url }}</a>
+    Currently: <a href="{{ user.profile_background.url }}">{{ user.profile_background.url|truncatechars:40 }}</a>
   {% else %}
     Currently: None
   {% endif %}
