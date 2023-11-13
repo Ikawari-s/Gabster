@@ -146,3 +146,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media', 'media_root')
 # LOGIN_REDIRECT_URL = 'profile'
 # ACCOUNT_EMAIL_REQUIRED = True
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+MAX_UPLOAD_SIZE = 52428800

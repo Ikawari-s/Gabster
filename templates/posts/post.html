@@ -15,11 +15,10 @@
 <body>
     <div class="post-container">
         <header><h1>Create Post</h1></header>
-
-        <form method="post" enctype="multipart/form-data" id="post-form">
+ <form method="post" enctype="multipart/form-data" id="post-form">
             {% csrf_token %}
             <div class="input-box">
-            <textarea class="post-field" name="{{ form.content.name }}" id="{{ form.content.id_for_label }}" oninput="enableSubmitButton()" placeholder="What's on your mind?"></textarea>
+                <textarea class="post-field" name="{{ form.content.name }}" id="{{ form.content.id_for_label }}" oninput="enableSubmitButton()" placeholder="What's on your mind?"></textarea>
             </div>
 
             <label>Select Type:</label>
@@ -31,18 +30,18 @@
             </label>
 
             <div id="picture-upload" style="display: none;">
-                <label for="{{ form.picture.id_for_label }}">Upload Picture:</label>
-                <input type="file" name="{{ form.picture.name }}" id="{{ form.picture.id_for_label }}">
+                <input type="file" accept="image/*" name="{{ form.picture.name }}" id="{{ form.picture.id_for_label }}">
+                <p class="file-size-info">Maximum file size: 50MB</p>
             </div>
 
             <div id="video-upload" style="display: none;">
-                <label for="{{ form.video.id_for_label }}">Upload Video:</label>
-                <input type="file" name="{{ form.video.name }}" id="{{ form.video.id_for_label }}">
+                <input type="file" accept="video/*" name="{{ form.video.name }}" id="{{ form.video.id_for_label }}">
+                <p class="file-size-info">Maximum file size: 50MB</p>
             </div>
 
             <input id="submit-btn" type="submit"  value="Create Post">
         </form>
-
+        <div id="error-messages" class="error-messages"></div>
 
      <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -53,6 +52,8 @@
         let contentInput = document.querySelector('input[name="{{ form.content.name }}');
 
         let currentSelection = null;
+        const MAX_FILE_SIZE = 50 * 1024 * 1024; // 25 MB in bytes
+        const errorMessages = document.getElementById('error-messages');
 
         pictureRadio.addEventListener('change', function() {
             toggleUploadSection('picture-upload', 'video-upload', pictureInput, videoInput);
@@ -79,58 +80,53 @@
             hideSection.style.display = 'none';
 
             currentSelection = showSectionId;
-            enableSubmitButton(contentInput, pictureInput, videoInput);
+            enableSubmitButton();
         }
 
-        function enableSubmitButton(contentInput, pictureInput, videoInput) {
-            // Get the submit button
+        function enableSubmitButton() {
             const submitButton = document.getElementById('submit-btn');
-            const errorMessages = document.getElementById('error-messages');
-            errorMessages.innerHTML = ''; // Clear previous error messages
-
-            // Check if content is not empty or either picture or video input has a file selected
-            if (contentInput.value.trim() !== '' || (pictureInput.files.length > 0 && validateFileExtensions(pictureInput)) || (videoInput.files.length > 0 && validateFileExtensions(videoInput))) {
+            if (validateFileExtensions(pictureInput) && validateFileExtensions(videoInput) && (contentInput.value.trim() !== '')) {
                 submitButton.disabled = false;
             } else {
                 submitButton.disabled = true;
-                errorMessages.innerHTML = 'Please fill out all required fields and upload a valid picture or video file.';
             }
         }
 
         function validateFileExtensions(fileInput) {
-            // Allowed file extensions for picture and video
-            const allowedPictureExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
-            const allowedVideoExtensions = ['.mp4', '.avi', '.mov', '.mkv'];
+            const allowedPictureExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            const allowedVideoExtensions = ['mp4', 'avi', 'mov', 'mkv'];
 
-            // Helper function to get the file extension from a filename
             function getFileExtension(filename) {
                 return filename.split('.').pop().toLowerCase();
             }
 
             if (fileInput.files.length > 0) {
                 const fileExtension = getFileExtension(fileInput.files[0].name);
-                if (fileInput === pictureInput) {
-                    if (!allowedPictureExtensions.includes('.' + fileExtension)) {
-                        errorMessages.innerHTML = 'Invalid picture file format. Please select a valid image file.';
-                        return false;
-                    }
-                } else if (fileInput === videoInput) {
-                    if (!allowedVideoExtensions.includes('.' + fileExtension)) {
-                        errorMessages.innerHTML = 'Invalid video file format. Please select a valid video file.';
-                        return false;
-                    }
+                const fileSize = fileInput.files[0].size;
+                if (fileSize > MAX_FILE_SIZE) {
+                    errorMessages.innerHTML = 'File size exceeds 50 MB limit.';
+                    fileInput.value = '';
+                    return false;
+                }
+
+                let allowedExtensions = fileInput === pictureInput ? allowedPictureExtensions : allowedVideoExtensions;
+                if (!allowedExtensions.includes(fileExtension)) {
+                    errorMessages.innerHTML = `Invalid file format. Allowed formats for ${fileInput === pictureInput ? 'pictures' : 'videos'}: ${allowedExtensions.join(', ')}.`;
+                    fileInput.value = '';
+                    return false;
                 }
             }
 
+            errorMessages.innerHTML = ''; // Clear any existing error messages
             return true;
         }
 
-        // Add event listeners for file inputs to trigger validation
+        // Event listeners for file inputs
         pictureInput.addEventListener('change', function() {
-            enableSubmitButton(contentInput, pictureInput, videoInput);
+            enableSubmitButton();
         });
         videoInput.addEventListener('change', function() {
-            enableSubmitButton(contentInput, pictureInput, videoInput);
+            enableSubmitButton();
         });
 
         // Initial validation

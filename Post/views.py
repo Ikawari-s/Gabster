@@ -23,7 +23,6 @@ def create_post(request, username):
         form = PostForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             user = request.user
-            print('shet')
             print(request.POST)
             post = form.save(commit=False)
             post.user = user
