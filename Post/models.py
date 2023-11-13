@@ -24,13 +24,20 @@ def upload_picture_path(instance, filename):
     return 'pictures/{final_filename}'.format(new_filename=new_filename, final_filename=final_filename)
 
 
+def upload_video_path(instance, filename):
+    new_filename = random.randint(1, 3910209312)
+    name, ext = get_filename_ext(filename)
+    final_filename = '{new_filename}{ext}'.format(new_filename=new_filename, ext=ext)
+    return 'videos/{final_filename}'.format(new_filename=new_filename, final_filename=final_filename)
+
+
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.CharField(max_length=500, blank=True, null=True)
     post_type = models.CharField(max_length=20, choices=[('picture', 'Picture'), ('video', 'Video')], default=None,
                                  null=True)
     picture = models.ImageField(upload_to=upload_picture_path, blank=True, null=True, default=None)
-    video = models.FileField(upload_to='videos/', blank=True, null=True, default=None)
+    video = models.FileField(upload_to=upload_video_path, blank=True, null=True, default=None)
     updated = models.DateTimeField(auto_now=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     likes = models.PositiveIntegerField(default=0)
@@ -56,8 +63,6 @@ class Post(models.Model):
         post.video = video
         post.save()
         return post
-
-
 
 
 @receiver(post_save, sender=Post)
