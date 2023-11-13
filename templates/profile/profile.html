@@ -19,14 +19,7 @@
 
                     <div class="cover-body d-flex justify-content-between align-items-center">
                         <div>
-{##}
-{#                            {% if person.username != user.username %}#}
-{#                                <a href="{% url 'add_testimonial' user_to_username=user.username %}"><input style="background: {{ user.color}}"  class="testimonial-btn" type="submit" value="Add Testimonial"></a>#}
-{#                            {% else %}#}
-{#                                <a href="{% url 'create_post' user %}">#}
-{#                                    <input  style="background: {{ user.color}}" class="post-btn" type="submit" value="Create Post">#}
-{#                                </a>#}
-{#                            {% endif %}#}
+
                             <img class="profile-pic" src="{{ user.profile_image.url }}" alt="profile">
 
 
@@ -112,15 +105,7 @@
                             </div>
 
         <div>
-{#        <div style="color: white"> <!-- This is for debugging -->#}
-{#            {% for posts in post %}#}
-{#                {% for foo in user_like %}#}
-{#                    {% if posts == foo.post %}#}
-{#                        {{ posts }}{% if foo.is_liked %}<i class="fa-solid fa-heart" id="like"></i>{% else %}<i class="fa-regular fa-heart" id="like"></i> {% endif %}<br>#}
-{#                    {% endif %}#}
-{#                {% endfor %}#}
-{#            {% endfor %}#}
-{#        </div>#}
+
             {% for post in post %}
                 <div class="col-md-12 grid-margin">
                     <div style="background: {{ user.color}}" class="card rounded">

@@ -20,49 +20,32 @@ from django.urls import path, include, re_path  # para mainclude ung views ng po
 from django.conf import settings
 from django.conf.urls.static import static
 
-from testimonials import views
-from testimonials.views import view_testimonials, testimonial_detail, add_testimonial, delete_testimonial
+
 from accounts.views import login_view, register_view, logout_view
 from .views import *
-from templates import *
-from testimonials import views
-# from django.conf.urls import url
-# from accounts.views import *
 from accounts import views
 from django.contrib.auth import views as auth_views
-from Post.views import *
+
 
 urlpatterns = [
     path('gasbter_admin/', include('admin_custom.urls')),
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
     path('', include('contact.urls')),
+    path('', include('comment.urls')),
     path('', include('customization.urls')),
+    path('', include('Post.urls')),
+    path('', include('testimonials.urls')),
 
 
-    # path('post/', post, name='post'),
     path('', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
-
     re_path(r'^profile/(?P<username>[\w.@+-]+)/$', profile_view, name='profile'),
-    re_path(r'^testimonials/(?P<user_to_username>[\w.@+-]+)/$', view_testimonials, name='view_testimonials'),
-    re_path(r'^testimonials/(?P<user_to_username>[\w.@+-]+)/(?P<testimonial_id>\d+)/$', testimonial_detail,
-            name='testimonial_detail'),
-    re_path(r'^addtestimonials/(?P<user_to_username>[\w.@+-]+)/$', add_testimonial, name='add_testimonial'),
-    re_path(r'^testimonials/(?P<user_to_username>[\w.@+-]+)/delete/(?P<testimonial_id>\d+)/$', delete_testimonial,
-            name='delete_testimonial'),
-
-    re_path(r'^createpost/(?P<username>[\w.@+-]+)/$', create_post, name='create_post'),
-    # re_path(r'^customization/(?P<username>[\w.@+-]+)/$', customization, name='customization'),
-    # re_path(r'^post/(?P<post_id>\d+)/$', post_detail, name='post_detail'),
-    re_path(r'^profile/(?P<username>[\w.@+-]+)/(?P<post_id>\d+)/$', post_detail, name='post_detail'),
-    path('', include('Post.urls')),
 
     path('verification/', include('verify_email.urls')),
     path('email_verification_sent/', views.resend_email_ver, name='email_verification_sent'),
     path('email_verification_success/', views.email_ver_success, name='email_verification_success'),
-
     path('activate/<str:uidb64>/<str:token>/', views.activate, name='activate'),
 
     path('search/', search, name='search'),
