@@ -147,3 +147,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media', 'media_root')
 # ACCOUNT_EMAIL_REQUIRED = True
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 MAX_UPLOAD_SIZE = 52428800
+
+CORS_REPLACE_HTTPS_REFERER      = False
+HOST_SCHEME                     = "http://"
+SECURE_PROXY_SSL_HEADER         = None
+SECURE_SSL_REDIRECT             = False
+SESSION_COOKIE_SECURE           = False
+CSRF_COOKIE_SECURE              = False
+SECURE_HSTS_SECONDS             = None
+SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
+SECURE_FRAME_DENY               = False
