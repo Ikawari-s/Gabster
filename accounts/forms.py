@@ -42,6 +42,7 @@ class AccountAuthenticationForm(forms.Form):
         "class": "form-control"
     }))
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
+
     #
     # class Meta:
     #     model = UserAccount
@@ -68,35 +69,44 @@ class AccountAuthenticationForm(forms.Form):
         return user
 
 
-
-
-
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = UserAccount
-        fields = ['profile_image', 'profile_cover', 'profile_song', 'profile_background', 'bio', 'location', 'color', 'backgroundColor', 'font_preference']
+        fields = ['profile_image', 'profile_cover', 'profile_song', 'profile_background', 'bio', 'location', 'color',
+                  'backgroundColor', 'fontColor']
+
+
 class ColorPreferenceForm(forms.ModelForm):
     class Meta:
         model = UserAccount
         fields = ['color']
 
+
 class BackgroundColorPreferenceForm(forms.ModelForm):
     class Meta:
         model = UserAccount
         fields = ['backgroundColor']
-class FontPreferenceForm(forms.ModelForm):
-    FONT_CHOICES = (
-        ('Young Serif', 'Young Serif'),
-        ('Roboto Slab', 'Roboto Slab'),
-        ('Noto Sans JP', 'Noto Sans JP'),
-        ('Yuji Hentaigana Akari', 'Yuji Hentaigana Akari'),
-    )
-    font_preference = forms.ChoiceField(
-        choices=FONT_CHOICES,
-        required=True,
-        widget=forms.Select(attrs={'class': 'form-control'}),
-    )
 
+
+# class FontPreferenceForm(forms.ModelForm):
+#     FONT_CHOICES = (
+#         ('Young Serif', 'Young Serif'),
+#         ('Roboto Slab', 'Roboto Slab'),
+#         ('Noto Sans JP', 'Noto Sans JP'),
+#         ('Yuji Hentaigana Akari', 'Yuji Hentaigana Akari'),
+#     )
+#     font_preference = forms.ChoiceField(
+#         choices=FONT_CHOICES,
+#         required=True,
+#         widget=forms.Select(attrs={'class': 'form-control'}),
+#     )
+#
+#     class Meta:
+#         model = UserAccount
+#         fields = ['font_preference']
+
+
+class FontColorPreferenceForm(forms.ModelForm):
     class Meta:
         model = UserAccount
-        fields = ['font_preference']
+        fields = ['fontColor']

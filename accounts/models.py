@@ -124,7 +124,8 @@ class UserAccount(AbstractBaseUser):
     location = models.CharField(max_length=100, null=True, blank=True)
     color = ColorField(default='#3a3b3c')
     backgroundColor = ColorField(default='linear-gradient(to right, rgba(44,15,85,0.9), rgba(44,15,38, 0.9))')
-    font_preference = models.CharField(max_length=50, default='"Poppins", sans-serif')
+    # font_preference = models.CharField(max_length=50, default='"Poppins", sans-serif')
+    fontColor = ColorField(default='linear-gradient(to right, rgba(44,15,85,0.9), rgba(44,15,38, 0.9))')
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']

@@ -101,7 +101,9 @@
     <title>Contact Us</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css?family={{ user.font_preference }}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mooli&family=Poppins:wght@200&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -206,9 +208,16 @@ Change:
             required />
   </p>
 
+
   <p>
-    <label for="id_font_preference">Font preference:</label>
-    <input type="text" name="font_preference" value="{{ user.font_preference.url }}" maxlength="50" required id="id_font_preference">
+    <label for="id_fontColor">Choose a Font Color:</label>
+    <input  type="color"
+            id="id_fontColor"
+            class="colorfield_field jscolor form-control"
+            name="fontColor"
+            value="{{ user.fontColor }}"
+            data-jscolor="{hash:true,width:25,height:150,format:'hex',required:true,paletteCols:1,paletteHeight:28}"
+            required />
   </p>
 
     <input id="submit-btn" type="submit" value="Update" href="{{ user.profile }}">

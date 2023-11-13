@@ -14,7 +14,7 @@ class ProfileUpdateForm(forms.ModelForm):
             'location',
             'color',
             'backgroundColor',
-            'font_preference',
+            'fontColor',
         ]
 
     def __init__(self, *args, **kwargs):
@@ -28,4 +28,4 @@ class ProfileUpdateForm(forms.ModelForm):
         self.fields['location'].required = False
         self.fields['color'].required = False
         self.fields['backgroundColor'].required = False
-        self.fields['font_preference'].required = False
+        self.fields['fontColor'].required = False

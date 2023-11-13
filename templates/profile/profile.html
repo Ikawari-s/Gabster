@@ -23,7 +23,7 @@
                             <img class="profile-pic" src="{{ user.profile_image.url }}" alt="profile">
 
 
-                            <span class="profile-name">{{user.username}}</span>
+                            <span style = "color: {{ user.fontColor }}" class="profile-name">{{user.username}}</span>
                         </div>
                     </div>
                 </div>
@@ -43,17 +43,17 @@
             <div style="background: {{ user.color}}" class="card rounded">
                 <div class="card-body">
                     <div>
-                        <label class="tx-11 font-weight-bold mb-0 text-uppercase">Joined:</label>
-                        <p class="text-muted">{{ user.date_joined}}</p>
+                        <label style = "color: {{ user.fontColor }}" class="tx-11 font-weight-bold mb-0 text-uppercase">Joined:</label>
+                        <p style = "color: {{ user.fontColor }}">{{ user.date_joined}}</p>
                     </div>
                     <div class="mt-3">
-                        <label class="tx-11 font-weight-bold mb-0 text-uppercase">Lives:</label>
-                        <p class="text-muted">{{user.location}}</p>
+                        <label style = "color: {{ user.fontColor }}" class="tx-11 font-weight-bold mb-0 text-uppercase">Lives:</label>
+                        <p style = "color: {{ user.fontColor }}" >{{user.location}}</p>
                     </div>
                     <div class="mt-3">
 
                         {% if not user.hide_email %}
-                            <label class="tx-11 font-weight-bold mb-0 text-uppercase">Email:</label>
+                            <label style = "color: {{ user.fontColor }}" class="tx-11 font-weight-bold mb-0 text-uppercase">Email:</label>
                             <p class="text-muted">{{ user.email }}</p>
                         {% endif %}
                     </div>
@@ -68,13 +68,13 @@
                 </div>
             </div>
           <div id="gallery-section">
-                    <div style="background: {{ user.color}}" class="card rounded">
+                    <div style="background: {{ user.color }}" class="card rounded">
                         <div class="card-body">
                             <div class="latest-photos">
                                 <div class="row"  style="padding-right: 20px">
                                     <div>
-                                        <label class="tx-11 font-weight-bold mb-0 text-uppercase">About:</label>
-                                        <p>{{ user.bio }}</p>
+                                        <label style = "color: {{ user.fontColor }}" class="tx-11 font-weight-bold mb-0 text-uppercase">About:</label>
+                                        <p style = "color: {{ user.fontColor }}">{{ user.bio }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -88,14 +88,14 @@
                     <div class="col-md-12 grid-margin">
                         <div style="background: {{ user.color }}" class="card rounded">
                             <div class="card-body">
-                                <h6>Got something in mind {{ person.username }}?</<h6>
+                                <h6 style = "color: {{ user.fontColor }}" >Got something in mind {{ person.username }}?</<h6>
                                 <div>
 
                             {% if person.username != user.username %}
                                 <a href="{% url 'add_testimonial' user_to_username=user.username %}"><input style="background: {{ user.color}}"  class="testimonial-btn" type="submit" value="Add Testimonial"></a>
                             {% else %}
                                 <a href="{% url 'create_post' user %}">
-                                    <input  style="background: {{ user.color}}" class="post-btn" type="submit" value="Create Post">
+                                    <input  style="background: {{ user.color}}; color: {{ user.fontColor }}" class="post-btn" type="submit" value="Create Post">
                                 </a>
                             {% endif %}
                         </div>
@@ -115,17 +115,17 @@
                                     <div class="d-flex align-items-center">
                                         <img class="img-xs rounded-circle" src="{{ user.profile_image.url }}" alt="" style = "object-fit: cover" style="margin-right: 15px">
                                         <div class="ml-2" id="user-posts">
-                                            <h5 style="padding: 0px">{{ post.user.username }}</h5>
-                                            <p class="tx-11 text-muted">{{ post.createdAt }}</p>
+                                            <h5 style="padding: 0px; color: {{ user.fontColor }}">{{ post.user.username }}</h5>
+                                            <p style = "color: {{ user.fontColor }}" class="tx-11" >{{ post.createdAt }}</p>
                                         </div>
                                     </div>
                                 </div>
                         </div>
                         <div class="card-body">
-                            <a href="{% url 'post_detail' post.user.username post.id %}">
-                                <p class="mb-3 tx-14">{{ post.content }}</p>
+                            <a style = "color: {{ user.fontColor }}" href="{% url 'post_detail' post.user.username post.id %}">
+                                <p style = "color: {{ user.fontColor }}" class="mb-3 tx-14">{{ post.content }}</p>
                                 {% if post.post_type == "picture" and post.picture %}
-                                    <img class="img-fluid" src="{{ post.picture.url }}" alt="">
+                                    <img style = "color: {{ user.fontColor }}" class="img-fluid" src="{{ post.picture.url }}" alt="">
                                 {% elif post.post_type == "video" and post.video %}
                                     <video controls>
                                         <source src="{{ post.video.url }}" type="video/mp4">
@@ -161,7 +161,7 @@
 
                                 </button>
 
-                                        <span class="ml-2 text-sm">{{ post.likes }} Likes</span>
+                                        <span style = "color: {{ user.fontColor }}" class="ml-2 text-sm">{{ post.likes }} Likes</span>
                                     </form>
                                 <form method="post" class="like-form" data-like-url="{% url 'like' user.username post.id %}">
                                         {% csrf_token %}
@@ -169,7 +169,7 @@
                                 <button type="button" id="comment" class="bg-green-500 text-white px-2 py-1 rounded-full flex items-center like-button">
                                         <i class="bi bi-chat" id="like"></i>
                                 </button>
-                                        <span class="ml-2 text-sm">{{ post.likes }} Comment</span>
+                                        <span style = "color: {{ user.fontColor }}" class="ml-2 text-sm">{{ post.likes }} Comment</span>
                                     </form>
                             </div>
                         </div>
@@ -185,8 +185,8 @@
                 <div class="col-md-12 grid-margin" style="padding: 0px" >
                     <div style="background: {{ user.color}}" class="card rounded"  >
                         <div class="card-body">
-                            <a class="testimonials" style="color:#24262e" href="{% url 'view_testimonials' user_to_username=user.username %}">Testimonials</a>
-                            <p>Number of testimonials: {{ testimonials_received|length }}</p>
+                            <a class="testimonials" style = "color: {{ user.fontColor }}" href="{% url 'view_testimonials' user_to_username=user.username %}">Testimonials</a>
+                            <p style = "color: {{ user.fontColor }}"> Number of testimonials: {{ testimonials_received|length }}</p>
                         </div>
                     </div>
                 </div>
@@ -196,14 +196,14 @@
                                     <div style="background: {{ user.color}}"  id="testimonial-border" class="d-flex justify-content-between mb-3 pb-1">
                                     <a style="color: #24262e" href="{% url 'testimonial_detail' user_to_username=testimonial.user_to.username testimonial_id=testimonial.id %}?came_from=profile">
                                         <div class="d-flex hover-pointer">
-                                            <img class="img-xs rounded-circle" id="testimonial-profile-pic"
+                                            <img style = "color: {{ user.fontColor }}" class="img-xs rounded-circle" id="testimonial-profile-pic"
                                                  src="{{ testimonial.user_from.profile_image.url }}"
                                                  alt="{{ testimonial.user_from.username }}">
                                             <div id="testimonial-content">
-                                                <h6>{{ testimonial.user_from.username }}</h6> <p style="font-size: 12px" class="tx-11 text-muted">{{ testimonial.createdAt | date:"F j, Y" }}</p> <br> <br>
+                                                <h6 style = "color: {{ user.fontColor }}" >{{ testimonial.user_from.username }}</h6> <p style="font-size: 12px; color: {{ user.fontColor }}" class="tx-11">{{ testimonial.createdAt | date:"F j, Y" }}</p> <br> <br>
 {#                                                <p style="color: black">{{ testimonial.content | truncatechars:30 }}</p>#}
                                             </div>
-                                        </div> <p id="testimonial-sentence">{{ testimonial.content | truncatechars:30 }}</p>
+                                        </div> <p style = "color: {{ user.fontColor }}" id="testimonial-sentence">{{ testimonial.content | truncatechars:30 }}</p>
                                     </div>
                                      </a>
                                 {% endfor %}

@@ -5,12 +5,12 @@
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
     <div class="card rounded" style="width: 60rem;max-height: none; background: {{ testimonial.user_to.color}};">
         <div class="card-header d-flex justify-content-between">
-            <a style="text-decoration: none;padding-top: 15px;" href="{% url 'profile' username=testimonial.user_from.username %}">
+            <a style="text-decoration: none;padding-top: 15px" href="{% url 'profile' username=testimonial.user_from.username %}">
                 <div class="d-flex align-items-center">
                     <img class="img-xs rounded-circle" src="{{ testimonial.user_from.profile_image.url }}" alt="" style = "object-fit: cover" style="margin-right: 15px">
                     <div style="padding: 0px 0px 0px 10px" class="ml-2">
-                        <h5  style="color:#24262e;">{{ testimonial.user_from.username }}</h5>
-                        <p class="tx-11 text-muted">{{ testimonial.createdAt }}</p>
+                        <h5  style = "color: {{ user.fontColor }}" >{{ testimonial.user_from.username }}</h5>
+                        <p style = "color: {{ user.fontColor }}" class="tx-11">{{ testimonial.createdAt }}</p>
                     </div>
                 </div>
             </a>
@@ -28,12 +28,12 @@
         </div>
 
         <div class="card-body" style="max-height: none;">
-            <p class="mb-3 tx-14">{{ testimonial.content }}</p>
+            <p style = "color: {{ user.fontColor }}" class="mb-3 tx-14">{{ testimonial.content }}</p>
         </div>
 
         <div class="card-footer">
             <div class="d-flex justify-content-between">
-                <p style="padding-left: 12px;" class="tx-11 text-muted">Created {{ testimonial.createdAt | timesince }} ago</p>
+                <p style="padding-left: 12px; color: {{ user.fontColor }}" class="tx-11">Created {{ testimonial.createdAt | timesince }} ago</p>
             </div>
         </div>
     </div>
