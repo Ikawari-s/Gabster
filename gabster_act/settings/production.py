@@ -24,7 +24,8 @@ SECRET_KEY = 'django-insecure-qgxllxkhe6i=wgq9sr^&vl$uo67i4q=*(y%ea&f(=v*)5-41z8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.herokuapp.com', 'gabster2-c5095d821f4f.herokuapp.com']
+ALLOWED_HOSTS = ['gabster2-c5095d821f4f.herokuapp.com']
+
 
 # '.herokuapp.com','*',
 # Application definition
@@ -36,6 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'Post',
+    'accounts',
+    'search',
+    'admin_custom',
+    'testimonials',
+    "verify_email.apps.VerifyEmailConfig",
+    'colorfield',
+    'contact',
+    'customization',
+    'comment',
 ]
 
 MIDDLEWARE = [
