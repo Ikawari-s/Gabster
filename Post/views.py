@@ -97,14 +97,24 @@ def like(request, username, post_id):
 @login_required
 def get_likes(request, post_id, username):
     post = get_object_or_404(Post, pk=post_id)
-    liked_users = [user.username for user in post.liked_by.all()]
-    return JsonResponse({'liked_users': liked_users})
+    liked_users = [{
+        'username': user.username,
+        'profile_image': user.profile_image.url if user.profile_image else None
+    } for user in post.liked_by.all()]
 
+    return JsonResponse({'liked_users': liked_users})
 
 @login_required
 def likedby(request, post_id, username):
     post = Post.objects.get(id=post_id)
-    liked_users = UserLike.objects.filter(post=post, is_liked=True)
+    liked_users = [
+        {
+            'username': user_like.voter.username,
+            'profile_image': user_like.voter.profile_image.url if user_like.voter.profile_image else None
+        }
+        for user_like in UserLike.objects.filter(post=post, is_liked=True)
+    ]
+
     return render(request, 'posts/liked_by.html', {'post': post, 'liked_users': liked_users})
 
 
