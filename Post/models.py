@@ -64,6 +64,8 @@ class Post(models.Model):
         post.save()
         return post
 
+    def comment_count(self):
+        return self.comment_set.count()
 
 @receiver(post_save, sender=Post)
 def create_post(sender, instance, created, **kwargs):

@@ -163,14 +163,11 @@
 
                                         <span style = "color: {{ user.fontColor }}" class="ml-2 text-sm">{{ post.likes }} Likes</span>
                                     </form>
-                                <form method="post" class="like-form" data-like-url="{% url 'like' user.username post.id %}">
-                                        {% csrf_token %}
-
-                                <button type="button" id="comment" class="bg-green-500 text-white px-2 py-1 rounded-full flex items-center like-button">
-                                        <i class="bi bi-chat" id="like"></i>
-                                </button>
-                                        <span style = "color: {{ user.fontColor }}" class="ml-2 text-sm">{{ post.likes }} Comment</span>
-                                    </form>
+                                 <div class="d-flex post-actions">
+                                    <a href="{% url 'post_detail' post.user.username post.id %}" class="d-flex align-items-center text-muted comment-btn" style="text-decoration: none; cursor: pointer;">
+                                      <p>{{ post.comment_count }} Comments</p>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

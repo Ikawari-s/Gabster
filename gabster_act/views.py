@@ -11,6 +11,7 @@ from accounts.forms import (
     # Make sure to import all necessary forms
 )
 from accounts.models import UserAccount, Location
+from comment.models import Comment
 from testimonials.models import Testimonial
 
 
@@ -20,7 +21,7 @@ from testimonials.models import Testimonial
 def profile_view(request, username):
     user = get_object_or_404(UserAccount, username=username)
     testimonials_received = Testimonial.objects.filter(user_to=user).order_by('-createdAt')
-    post = Post.objects.filter(user=user).order_by('-createdAt')
+    posts = Post.objects.filter(user=user).order_by('-createdAt')
     color_form = ColorPreferenceForm(instance=user)
     background_color_form = BackgroundColorPreferenceForm(instance=user)
     locations = Location.objects.all()
@@ -32,7 +33,8 @@ def profile_view(request, username):
     # if request.user != user:
     #     messages.error(request, "You cannot edit someone else's profile.")
     #     return redirect('search')  # Redirect to a different view such as the home page or user's own profile
-
+    for post in posts:
+        post.comment_count = Comment.objects.filter(post=post).count()
     if request.method == 'POST':
         # Assuming the submit button for the profile update has the name 'profile_update'
         if 'profile_update' in request.POST:
@@ -48,7 +50,7 @@ def profile_view(request, username):
         'user': user,
         'person': request.user,
         'testimonials_received': testimonials_received,
-        'post': post,
+        'post': posts,
         'user_like': user_like,
         # 'font_form': font_form,
         'user_background': user.backgroundColor,

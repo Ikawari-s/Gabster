@@ -16,7 +16,7 @@
                 </div>
             </a>
             {% if user.is_authenticated and user == request.user %}
-            <button type="button" id="delete" class="btn-sm delete-button" data-toggle="modal" data-target="#deletePostModal">
+            <button type="button" id="delete" class="btn-sm delete-button" data-toggle="modal" data-target="#deletePostModal" data-comment-id="{{ comment.id }}">
                 <i style="padding-right: 18px" class="bi bi-trash3"></i>
             </button>
             {% endif %}
@@ -57,8 +57,8 @@
                     </form>
                 </div>
                 <div class="d-flex post-actions">
-                    <a class="d-flex align-items-center comment-btn" style="text-decoration: none; cursor: pointer;color: {{ user.fontColor }}">
-                        <i style = "color: {{ user.fontColor }}" class="far fa-comment"></i> Comment
+                     <a class="d-flex align-items-center text-muted comment-btn" id="toggle-add-comment"  style="text-decoration: none; cursor: pointer;">
+                         <p>{{ post.comment_count }} Comments</p>
                     </a>
                 </div>
             </div>
@@ -66,7 +66,7 @@
     </div>
 
     <!-- Add Comment Section -->
-    <div class="card mb-4" style="width: 60rem; max-height: none; background: {{ user.color }}">
+    <div class="card mb-4" id="add-comment-section" style="width: 60rem; max-height: none;  background: {{ user.color }}">
         <div class="card-body">
             <form style = "color: {{ user.fontColor }}" method="post" id="comment-form" action="{% url 'comment_post' post.id %}">
                 {% csrf_token %}
@@ -93,7 +93,7 @@
             </div>
              {% if user.is_authenticated and user == request.user %}
             <button type="button" id="delete" class="btn-sm delete-button" data-toggle="modal" data-target="#deleteCommentModal" data-comment-id="{{ comment.id }}">
-                <i style="padding-right: 18px" class="bi bi-trash3">{{ comment.id }}</i>
+                <i style="padding-right: 18px" class="bi bi-trash3"></i>
             </button>
             {% endif %}
             {% endfor %}
@@ -155,7 +155,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    $(document).ready(function () {
+      $(document).ready(function () {
         $(".like-button-post").click(function (event) {
             event.preventDefault(); // Prevent the default form submit action
             const likeForm = $(this).closest(".like-form");
@@ -178,6 +178,9 @@
                 }
             });
         });
+        $('#toggle-add-comment').click(function() {
+        $('#add-comment-section').slideToggle('slow');
+     });
     });
 
     function changeIcon(button) {
@@ -189,18 +192,7 @@
         }
     }
 
-    // Toggle comments section
-   $('.comment-btn').click(function() {
-            $("#comments-section").slideToggle('slow', function() {
-                // Check if the comments section is now visible
-                if ($("#comments-section").is(":visible")) {
-                    // Scroll to the comments section
-                    $('html, body').animate({
-                        scrollTop: $("#comments-section").offset().top
-                    }, 1000);
-                }
-            });
-        });
+
 $('#deleteCommentModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget); // Button that triggered the modal
     var commentId = button.data('comment-id'); // Extract comment ID from the button
@@ -214,6 +206,7 @@ $('#deleteCommentModal').on('show.bs.modal', function (event) {
 $('#delete-comment-form').on('submit', function() {
     console.log("Form action at form submission: ", $(this).attr('action')); // Log the form action at submission
 });
+
 
 </script>
 {% endblock %}
