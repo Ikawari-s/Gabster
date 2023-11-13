@@ -32,6 +32,12 @@ class PostForm(forms.ModelForm):
         cleaned_data = super().clean()
         post_type = cleaned_data.get('post_type')
         content = cleaned_data.get('content')
+        content = cleaned_data.get('content')
+        picture = cleaned_data.get('picture')
+        video = cleaned_data.get('video')
+
+        if not content and not picture and not video:
+            raise ValidationError("You must provide either content, a picture, or a video.")
 
         # If the post_type is 'picture' or 'video', the content field is not required.
         if post_type in ['picture', 'video']:
