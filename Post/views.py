@@ -110,7 +110,9 @@ def likedby(request, post_id, username):
     liked_users = [
         {
             'username': user_like.voter.username,
-            'profile_image': user_like.voter.profile_image.url if user_like.voter.profile_image else None
+            'profile_image': user_like.voter.profile_image.url if user_like.voter.profile_image else None,
+            'fontColor': user_like.voter.fontColor,
+            'color': user_like.voter.color,
         }
         for user_like in UserLike.objects.filter(post=post, is_liked=True)
     ]

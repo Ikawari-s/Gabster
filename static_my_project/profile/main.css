@@ -440,6 +440,15 @@ d-flex justify-content-between mb-2 pb-2 border-bottom {
     margin-right: 15px;
     object-fit: cover;
 }
+
+#liked-profile-pic {
+    height: 90px;
+    width: 90px;
+    overflow: hidden;
+    margin-left: 10px;
+    margin-right: 15px;
+    object-fit: cover;
+}
 #like{
     margin-right: -6px;
     background: none;

@@ -14,8 +14,8 @@
                 <div class="col-md-4">
                     <div class="testimonial-item">
                         <a style="text-decoration: none" href="{% url 'testimonial_detail' testimonial.user_to.username testimonial.id %}?came_from=view_testimonials">
-                            <div style="background: {{ user.color }}" class="card rounded">
-                                <div style="padding: 20px 10px 10px;color: {{ user.fontColor }} " class="card-header">
+                            <div style="background: {{ testimonial.user_from.color }}" class="card rounded">
+                                <div style="padding: 20px 10px 10px;color: {{ testimonial.user_from.fontColor }} " class="card-header">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div class="d-flex align-items-center">
                                             <img class="img-xs rounded-circle" id="testimonial-profile-pic"
@@ -23,7 +23,7 @@
                                                  alt="{{ testimonial.user_from.username }}">
                                             <div class="d-flex justify-content-between">
                                                 <h5>{{ testimonial.user_from.username }}</h5>
-                                                <p style="padding-left: 15px; padding-top: 4px; font-size: 12px;color: {{ user.fontColor }}" class="tx-11">{{ testimonial.createdAt | date:"F j, Y" }}</p>
+                                                <p style="padding-left: 15px; padding-top: 4px; font-size: 12px;color: {{ testimonial.user_from.fontColor }}" class="tx-11">{{ testimonial.createdAt | date:"F j, Y" }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -31,9 +31,9 @@
                                 <div class="testimonial-body">
                                     <ul class="testimonial-list">
                                         <li class="testimonial-item">
-                                            <p style="color: {{ user.fontColor }}" class="tx-14">{{ testimonial.content | truncatechars:45 }}</p>
+                                            <p style="color: {{ testimonial.user_from.fontColor }}" class="tx-14">{{ testimonial.content | truncatechars:45 }}</p>
                                             <div class="d-flex justify-content-between">
-                                                <p style="font-size: 12px;color: {{ user.fontColor }}" class="tx-11">{{ testimonial.createdAt | timesince }} ago</p>
+                                                <p style="font-size: 12px;color: {{ testimonial.user_from.fontColor }}" class="tx-11">{{ testimonial.createdAt | timesince }} ago</p>
                                             </div>
                                         </li>
                                     </ul>

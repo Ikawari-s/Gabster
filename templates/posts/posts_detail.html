@@ -26,9 +26,9 @@
             <a href="{% url 'post_detail' post.user.username post.id %}">
                 <p style = "color: {{ user.fontColor }}" class="mb-3 tx-14">{{ post.content }}</p>
                 {% if post.post_type == "picture" and post.picture %}
-                <img class="img-fluid" src="{{ post.picture.url }}" alt="">
+                <img style = "color: {{ user.fontColor }}; width: 922px; height: auto;" class="img-fluid" src="{{ post.picture.url }}" alt="">
                 {% elif post.post_type == "video" and post.video %}
-                <video controls>
+                <video controls style="width: 922px; height: auto;">
                     <source src="{{ post.video.url }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
