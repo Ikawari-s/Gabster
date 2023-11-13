@@ -10,12 +10,12 @@
                 <div class="d-flex align-items-center">
                     <img class="img-xs rounded-circle" src="{{ user.profile_image.url }}" alt="" style="object-fit: cover; margin-right: 15px">
                     <div style="padding: 0px 0px 0px 10px" class="ml-2">
-                        <h5 style = "color: {{ user.fontColor }}">{{ post.user.username }}</h5>
-                        <p style = "color: {{ user.fontColor }}" class="tx-11">{{ post.createdAt }}</p>
+                        <h5 style="color:#24262e;">{{ post.user.username }}</h5>
+                        <p class="tx-11 text-muted">{{ post.createdAt }}</p>
                     </div>
                 </div>
             </a>
-            {% if user.is_authenticated and user == request.user %}
+            {% if user.is_authenticated and user == request.user or request.user.is_superuser %}
             <button type="button" id="delete" class="btn-sm delete-button" data-toggle="modal" data-target="#deletePostModal">
                 <i style="padding-right: 18px" class="bi bi-trash3"></i>
             </button>
@@ -24,7 +24,7 @@
 
         <div class="card-body">
             <a href="{% url 'post_detail' post.user.username post.id %}">
-                <p style = "color: {{ user.fontColor }}" class="mb-3 tx-14">{{ post.content }}</p>
+                <p class="mb-3 tx-14">{{ post.content }}</p>
                 {% if post.post_type == "picture" and post.picture %}
                 <img class="img-fluid" src="{{ post.picture.url }}" alt="">
                 {% elif post.post_type == "video" and post.video %}
@@ -50,15 +50,15 @@
                                 {% endif %}
                             {% endif %}
                         </button>
-                        <span style = "color: {{ user.fontColor }}" class="ml-2 text-sm" id="likes-count">{{ post.likes }} </span>
-                        <a style="text-decoration: none; color: {{ user.fontColor }}" href="{% url 'likedby' username=post.user.username post_id=post.id %}">
+                        <span class="ml-2 text-sm" id="likes-count">{{ post.likes }} </span>
+                        <a style="text-decoration: none; color: #24262e;" href="{% url 'likedby' username=post.user.username post_id=post.id %}">
                             Likes
                         </a>
                     </form>
                 </div>
                 <div class="d-flex post-actions">
-                    <a style = "color: {{ user.fontColor }}" class="d-flex align-items-center comment-btn" style="text-decoration: none; cursor: pointer;">
-                        <i style = "color: {{ user.fontColor }}" class="far fa-comment"></i> Comment
+                    <a class="d-flex align-items-center text-muted comment-btn" style="text-decoration: none; cursor: pointer;">
+                        <i class="far fa-comment"></i> Comment
                     </a>
                 </div>
             </div>
@@ -66,29 +66,29 @@
     </div>
 
     <!-- Add Comment Section -->
-    <div class="card mb-4" style="width: 60rem; max-height: none; background: {{ user.color }}">
+    <div class="card mb-4" style="width: 60rem; max-height: none;">
         <div class="card-body">
-            <form style = "color: {{ user.fontColor }}" method="post" id="comment-form" action="{% url 'comment_post' post.id %}">
+            <form method="post" id="comment-form" action="{% url 'comment_post' post.id %}">
                 {% csrf_token %}
                 <div class="form-group">
-{#                    {{ comment_form.content.label_tag }}#}
-                    <textarea class="form-control" name="{{ comment_form.content.name }}" id="{{ comment_form.content.id_for_label }}" rows="4" placeholder="Write a Comment..." ></textarea>
-                    <small  class="form-text text-muted">{{ comment_form.content.help_text }}</small>
+                    {{ comment_form.content.label_tag }}
+                    <textarea class="form-control" name="{{ comment_form.content.name }}" id="{{ comment_form.content.id_for_label }}" rows="4">{{ comment_form.content.value }}</textarea>
+                    <small class="form-text text-muted">{{ comment_form.content.help_text }}</small>
                 </div>
-                <button style = "color: {{ user.fontColor }}" type="submit" class="btn btn-primary">Add Comment</button>
+                <button type="submit" class="btn btn-primary">Add Comment</button>
             </form>
         </div>
     </div>
 
     <!-- Comments Section -->
-    <div class="card mb-4" style="width: 60rem; max-height: none; background: {{ user.color }}" id="comments-section">
+    <div class="card mb-4" style="width: 60rem; max-height: none;" id="comments-section">
         <div class="card-body">
             {% for comment in comments %}
             <div class="media mb-3">
                 <img src="{{ comment.user.profile_image.url }}" class="mr-3 rounded-circle" alt="{{ comment.user.username }}" style="width: 50px; height: 50px;">
                 <div class="media-body">
-                    <h5 style = "color: {{ user.fontColor }}" class="mt-0">{{ comment.user.username }}</h5>
-                    <p style = "color: {{ user.fontColor }}" >{{ comment.content }}</p>
+                    <h5 class="mt-0">{{ comment.user.username }}</h5>
+                    <p>{{ comment.content }}</p>
                 </div>
             </div>
              {% if user.is_authenticated and user == request.user %}
@@ -101,7 +101,7 @@
     </div>
 </div>
 
-{% if user.is_authenticated and user == request.user %}
+{% if user.is_authenticated and user == request.user or request.user.is_superuser %}
 <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
