@@ -91,11 +91,11 @@ DATABASES = {
     }
 }
 
-# import dj_database_url
-#
-# db_from_env = dj_database_url.config()
-# DATABASES['default'].update(db_from_env)
-# DATABASES['default']['CONN_MAX_AGE'] = 500
+import dj_database_url
+
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+DATABASES['default']['CONN_MAX_AGE'] = 500
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -165,7 +165,7 @@ VERIFICATION_SUCCESS_TEMPLATE = "accounts/email_ver_success.html"
 VERIFICATION_FAILED_TEMPLATE = "accounts/email_ver_failed.html"
 
 LINK_EXPIRED_TEMPLATE = "accounts/email_ver_expired.html"
-
+MAX_UPLOAD_SIZE = 52428800
 CORS_REPLACE_HTTPS_REFERER = True
 HOST_SCHEME = "https://"
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
