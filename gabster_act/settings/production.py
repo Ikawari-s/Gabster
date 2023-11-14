@@ -167,6 +167,8 @@ VERIFICATION_FAILED_TEMPLATE = "accounts/email_ver_failed.html"
 
 LINK_EXPIRED_TEMPLATE = "accounts/email_ver_expired.html"
 
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 MAX_UPLOAD_SIZE = 52428800
 
 CORS_REPLACE_HTTPS_REFERER = True
