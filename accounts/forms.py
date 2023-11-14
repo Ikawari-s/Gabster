@@ -18,7 +18,7 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = UserAccount
-        fields = ('email', 'username', 'password1', 'password2')
+        fields = ['username', 'email', 'password1', 'password2']
 
     def clean_email(self):
         email = self.cleaned_data['email'].lower()
@@ -30,11 +30,9 @@ class RegistrationForm(UserCreationForm):
 
     def clean_username(self):
         username = self.cleaned_data['username'].lower()
-        try:
-            account = UserAccount.objects.get(username=username)
-        except Exception as e:
-            return username
-        raise forms.ValidationError(f"Username {username} is already in use.")
+        if UserAccount.objects.filter(username=username).exists():
+            raise forms.ValidationError(f'Username {username} is already in use.')
+        return username
 
 
 class AccountAuthenticationForm(forms.Form):

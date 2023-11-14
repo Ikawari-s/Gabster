@@ -22,14 +22,17 @@ from django.contrib import messages
 from .forms import ProfileUpdateForm
 
 
-def register_view(request, *args, **kwargs):
-    user = request.user
-    if user.is_authenticated:
-        return HttpResponse(f'You are already authenticated as {user.email}.')
-    context = {}
+def register_view(request):
+    # user = request.user
+    if request.user.is_authenticated:
+        return HttpResponse(f'You are already authenticated as {request.user}.')
+    # context = {}
+    form = RegistrationForm()
 
     if request.POST:
         form = RegistrationForm(request.POST)
+        print(form)
+        print(form.is_valid())
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active = False  # False since not yet verified
@@ -39,9 +42,11 @@ def register_view(request, *args, **kwargs):
 
             return render(request, 'accounts/email_ver_sent.html', {})
         else:
-            context['registration_form'] = form
+            form = RegistrationForm()
+        # context['form'] = form
+                # return render(request, 'accounts/register.html', context)
 
-    return render(request, 'accounts/register.html', context)
+    return render(request, 'accounts/register.html', {'form': form})
 
 
 # def send_activation_email(request, user):
