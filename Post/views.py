@@ -60,7 +60,7 @@ def post_detail(request, username, post_id):
             new_comment.save()
             return redirect('post_detail', username=username, post_id=post_id)
 
-    return render(request, 'Posts/posts_detail.html', {
+    return render(request, 'posts/posts_detail.html', {
         'user': user,
         'post': post,
         'user_like': user_like,
