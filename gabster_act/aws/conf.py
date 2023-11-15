@@ -27,4 +27,4 @@ AWS_HEADERS = {
     'Cache-Control': 'max-age=%d' % (int(two_months.total_seconds()),),
 }
 
-AUTH_PASSWORD_VALIDATORS = True
+# AUTH_PASSWORD_VALIDATORS = True
