@@ -60,7 +60,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 AUTH_USER_MODEL = 'accounts.UserAccount'
-
+AUTHENTICATION_BACKENDS = (
+    # 'django.contrib.auth.backends.AllowAllUsersModelBackend',
+    'accounts.backends.CaseInsensitiveModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.backends.AuthenticationEmailBackend',
+)
 ROOT_URLCONF = 'gabster_act.urls'
 
 TEMPLATES = [
