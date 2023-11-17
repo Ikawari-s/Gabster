@@ -37,7 +37,7 @@
 <div class="dropdown">
 
     <a class = "btn btn-success btn-l mt-3" id="button">
-        <img src="{{ user.profile_image.url }}" >
+        <img src="{{ request.user.profile_image.url }}" >
     </a>
     <div class="dropdown-content" id="myDropdown">
                 <a href="{% url 'update_profile' %}">Edit Profile</a>
