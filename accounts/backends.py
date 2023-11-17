@@ -7,18 +7,18 @@ from accounts.models import UserAccount
 UserModel = get_user_model()
 class CaseInsensitiveModelBackend(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
-
         if username is None:
             username = kwargs.get(UserModel.USERNAME_FIELD)
-        try:
-            case_insensitive_username_field = '{}__iexact'.format(UserModel.USERNAME_FIELD)
-            user = UserModel._default_manager.get(**{case_insensitive_username_field: username})
-        except UserModel.DoesNotExist:
-            UserModel().set_password(password)
-        else:
+
+        users = UserModel._default_manager.filter(
+            Q(**{f"{UserModel.USERNAME_FIELD}__iexact": username}) |
+            Q(**{"email__iexact": username})
+        )
+
+        for user in users:
             if user.check_password(password) and self.user_can_authenticate(user):
                 return user
-
+        return None
 class UserDoesNotExistError(Exception):
     pass
 
