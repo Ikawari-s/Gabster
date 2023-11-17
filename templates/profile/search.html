@@ -11,7 +11,7 @@
                             <div class="col-12 grid-margin">
                                 <div style="background: {{ user.backgroundColor}}; border-radius: 5px;" class="row" id="upper-profile">
                                     <div class="col-12 grid-margin">
-                                        <a style="color: #24262e; text-decoration: none;" href="{% url 'profile' user.username %}">
+                                        <a style="color: {{user.fontColor}}; text-decoration: none;" href="{% url 'profile' user.username %}">
                                             <div style="background: {{ user.color }}" class="profile-header">
                                                 <div style="background: {{ user.color }}" class="cover">
                                                     <div class="gray-shade"></div>
