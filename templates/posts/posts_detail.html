@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh; padding: 20px;">
     <div class="card rounded" style="width: 60rem;max-height: none; background: {{ user.color }};">
     <div class="card rounded" style="width: 60rem;max-height: none; background: {{ user.color }};">
@@ -42,8 +43,8 @@
                     <form method="post" class="like-form" data-like-url="{% url 'like' post.user.username post.id %}">
                         {% csrf_token %}
                          <button onclick="changeIcon(this)" type="button" id="like" class="bg-green-500 text-white px-2 py-1 rounded-full flex items-center like-button-post">
-                            {% if post == foo.post %}
-                                {% if foo.is_liked %}
+                            {% if post == user_like.post %}
+                                {% if user_like.is_liked %}
                                     <i class="fa-solid fa-heart" id="like"></i>
                                 {% else %}
                                     <i class="fa-regular fa-heart" id="like"></i>
@@ -183,12 +184,14 @@
      });
     });
 
-    function changeIcon(button) {
-        const icon = button.find("i");
-        if (icon.hasClass("fa-solid")) {
-            icon.removeClass("fa-solid").addClass("fa-regular");
+   function changeIcon(button) {
+        const icon = button.querySelector("i");
+        if (icon.classList.contains("fa-solid")) {
+            icon.classList.remove("fa-solid");
+            icon.classList.add("fa-regular");
         } else {
-            icon.removeClass("fa-regular").addClass("fa-solid");
+            icon.classList.remove("fa-regular");
+            icon.classList.add("fa-solid");
         }
     }
 
